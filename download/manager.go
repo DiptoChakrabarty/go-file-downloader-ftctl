@@ -2,7 +2,9 @@ package download
 
 import (
 	"fmt"
+	"io/ioutil"
 	"net/http"
+	"os"
 	"strconv"
 )
 
@@ -40,7 +42,7 @@ func (d Downloader) Connect() (int, error) {
 	return size, nil
 }
 
-func (d Downloader) Download(part [2]int) error {
+func (d Downloader) Download(part [2]int, index int) error {
 	req, err := d.sendReq("GET")
 	if err != nil {
 		return err
@@ -56,5 +58,25 @@ func (d Downloader) Download(part [2]int) error {
 
 	fmt.Println("Part of File Downloaded")
 	fmt.Printf("Downloaded %v bytes", resp.Header.Get("Content-Length"))
+
+	err = d.writeFile(d.Path, index, resp)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (d Downloader) writeFile(path string, index int, resp *http.Response) error {
+	bf, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return err
+	}
+
+	filename := fmt.Sprintf("part-%v.tmp", index)
+	err = ioutil.WriteFile(filename, bf, os.ModePerm)
+	if err != nil {
+		return err
+	}
 	return nil
 }

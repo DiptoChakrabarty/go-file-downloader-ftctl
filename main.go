@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sync"
 
 	"ytctl/download"
 )
@@ -38,11 +39,21 @@ func main() {
 		}
 	}
 
-	fmt.Println(parts)
+	//fmt.Println(parts)
+	var wg sync.WaitGroup
 
-	err = vd.Download(parts[0])
-	if err != nil {
-		panic(err)
+	for index, part := range parts {
+		index := index
+		part := part
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			err = vd.Download(part, index)
+			if err != nil {
+				panic(err)
+			}
+		}()
 	}
+	wg.Wait()
 
 }
