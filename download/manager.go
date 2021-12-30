@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-func (d Downloader) checkLink(method string) (*http.Request, error) {
+func (d Downloader) sendReq(method string) (*http.Request, error) {
 	req, err := http.NewRequest(
 		method,
 		d.Link,
@@ -22,7 +22,7 @@ func (d Downloader) checkLink(method string) (*http.Request, error) {
 
 func (d Downloader) Connect() (int, error) {
 	fmt.Println("Establishing new Connection")
-	req, err := d.checkLink("HEAD")
+	req, err := d.sendReq("HEAD")
 	if err != nil {
 		return -1, err
 	}
@@ -38,4 +38,23 @@ func (d Downloader) Connect() (int, error) {
 		return -1, err
 	}
 	return size, nil
+}
+
+func (d Downloader) Download(part [2]int) error {
+	req, err := d.sendReq("GET")
+	if err != nil {
+		return err
+	}
+
+	partBytes := fmt.Sprintf("bytes=%v-%v", part[0], part[1])
+	req.Header.Set("Range", partBytes)
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println("Part of File Downloaded")
+	fmt.Printf("Downloaded %v bytes", resp.Header.Get("Content-Length"))
+	return nil
 }

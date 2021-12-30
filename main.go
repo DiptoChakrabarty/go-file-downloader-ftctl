@@ -9,8 +9,8 @@ import (
 func main() {
 	fmt.Println("This is Start")
 	vd := download.Downloader{
-		Link:        "https://www.youtube.com/watch?v=vdhSk8vCx-k&t=328s",
-		Path:        "proj.mp4",
+		Link:        "https://raw.githubusercontent.com/DiptoChakrabarty/go-gin-movies/main/docker-compose.yml",
+		Path:        "docker-compose.yml",
 		Connections: 10,
 	}
 
@@ -39,5 +39,10 @@ func main() {
 	}
 
 	fmt.Println(parts)
+
+	err = vd.Download(parts[0])
+	if err != nil {
+		panic(err)
+	}
 
 }
