@@ -80,3 +80,25 @@ func (d Downloader) writeFile(path string, index int, resp *http.Response) error
 	}
 	return nil
 }
+
+func (d Downloader) MergeFiles() error {
+	fil, err := os.OpenFile(d.Path, os.O_CREATE|os.O_APPEND|os.O_WRONLY, os.ModePerm)
+	if err != nil {
+		return err
+	}
+	defer fil.Close()
+
+	for i := 0; i < d.Connections; i++ {
+		filename := fmt.Sprintf("part-%v.tmp", i)
+		buf, err := ioutil.ReadFile(filename)
+		if err != nil {
+			return err
+		}
+		byt, err := fil.Write(buf)
+		if err != nil {
+			return err
+		}
+		fmt.Printf("File %v merged , Bytes : %v\n", i, byt)
+	}
+	return nil
+}

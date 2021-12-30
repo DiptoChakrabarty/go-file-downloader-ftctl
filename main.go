@@ -55,5 +55,5 @@ func main() {
 		}()
 	}
 	wg.Wait()
-
+	vd.MergeFiles()
 }
