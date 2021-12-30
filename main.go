@@ -16,9 +16,28 @@ func main() {
 
 	fmt.Println(vd)
 
-	err := vd.Connect()
+	size, err := vd.Connect()
 	if err != nil {
 		panic(err)
 	}
+
+	var parts = make([][2]int, vd.Connections)
+	partSize := size / vd.Connections
+
+	fmt.Printf("Size of each part is %d bytes\n", partSize)
+
+	for i := 0; i < vd.Connections; i++ {
+		if i > 0 {
+			parts[i][0] = parts[i-1][1] + 1
+		}
+
+		if i < vd.Connections-1 {
+			parts[i][1] = parts[i][0] + partSize
+		} else {
+			parts[i][1] = size - 1
+		}
+	}
+
+	fmt.Println(parts)
 
 }
