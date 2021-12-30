@@ -1,4 +1,4 @@
-package types
+package download
 
 type Downloader struct {
 	Link        string
