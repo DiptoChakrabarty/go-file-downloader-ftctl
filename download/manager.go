@@ -24,6 +24,7 @@ func (d Downloader) sendReq(method string) (*http.Request, error) {
 
 func (d Downloader) Connect() (int, error) {
 	fmt.Println("Establishing new Connection")
+	//fmt.Println(d)
 	req, err := d.sendReq("HEAD")
 	if err != nil {
 		return -1, err
