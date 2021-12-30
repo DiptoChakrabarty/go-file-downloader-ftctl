@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/DiptoChakrabarty/ytctl/download"
+	"ytctl/download"
 )
 
 func main() {

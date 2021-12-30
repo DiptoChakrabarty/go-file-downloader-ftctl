@@ -1,27 +1,27 @@
 package download
 
 import (
-	"net/http"
 	"fmt"
+	"net/http"
 )
 
 func (d Downloader) checkLink(method string) (*http.Request, error) {
 	req, err := http.NewRequest(
 		method,
 		d.Link,
-		body: nil,
+		nil,
 	)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return req,nil
+	return req, nil
 }
 
 func (d Downloader) Connect() error {
 	fmt.Println("Establishing new Connection")
-	req, err := d.checkLink(method: "HEAD")
+	req, err := d.checkLink("HEAD")
 	if err != nil {
 		return err
 	}
@@ -31,6 +31,6 @@ func (d Downloader) Connect() error {
 		return err
 	}
 
-	fmt.Printf("Got response %v\n",resp.StatusCode)
+	fmt.Printf("Got response %v\n", resp.StatusCode)
 	return nil
 }
