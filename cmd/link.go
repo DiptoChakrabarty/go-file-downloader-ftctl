@@ -2,8 +2,8 @@ package cmd
 
 import (
 	"fmt"
+	"ftctl/download"
 	"sync"
-	"ytctl/download"
 
 	"github.com/spf13/cobra"
 )

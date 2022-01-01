@@ -1,7 +1,7 @@
 package main
 
 import (
-	"ytctl/cmd"
+	"ftctl/cmd"
 )
 
 func main() {
