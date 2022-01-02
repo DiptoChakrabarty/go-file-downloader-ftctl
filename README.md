@@ -29,3 +29,15 @@ This is a file downloader cli written in Golang which uses the concurrent featur
 
 
 The project has a few bugs you can check the issues for it [![GitHub issues](https://img.shields.io/github/issues/Naereen/StrapDown.js.svg)](https://GitHub.com/DiptoChakrabarty/go-file-downloader-ftctl/issues/)
+
+![Download File](https://github.com/DiptoChakrabarty/go-file-downloader-ftctl/blob/main/images/download.PNG?raw=true)
+
+Downloading a file
+
+![Download Result](https://github.com/DiptoChakrabarty/go-file-downloader-ftctl/blob/main/images/download1_result.PNG?raw=true)
+
+Downloaded File
+
+![Download Video](https://github.com/DiptoChakrabarty/go-file-downloader-ftctl/blob/main/images/videodownload.PNG?raw=true)
+
+Downloading a Video
