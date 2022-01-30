@@ -28,6 +28,7 @@ func init() {
 
 func downloadmanager(cmd *cobra.Command, args []string) error {
 	fmt.Println("This is Start")
+	fmt.Println("This is value of kcheck", s)
 	//input := strings.Join(args, " ")
 	link, _ := cmd.Flags().GetString("link")
 	path, _ := cmd.Flags().GetString("path")
