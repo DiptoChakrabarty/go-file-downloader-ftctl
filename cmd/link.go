@@ -9,7 +9,7 @@ import (
 )
 
 //var dl = &download.Downloader{}
-var s string
+//var s string
 
 var DownloadCmd = &cobra.Command{
 	Use:   "download",
@@ -23,12 +23,12 @@ func init() {
 	DownloadCmd.PersistentFlags().StringP("link", "l", "", "Link of file to download")
 	DownloadCmd.PersistentFlags().StringP("path", "p", "download.yml", "path to set download")
 	DownloadCmd.PersistentFlags().IntP("connection", "c", 10, "No of connections to make")
-	DownloadCmd.Flags().StringVarP(&s, "kcheck", "k", s, "just check")
+	//DownloadCmd.Flags().StringVarP(&s, "kcheck", "k", s, "just check")
 }
 
 func downloadmanager(cmd *cobra.Command, args []string) error {
 	fmt.Println("This is Start")
-	fmt.Println("This is value of kcheck", s)
+	//fmt.Println("This is value of kcheck", s)
 	//input := strings.Join(args, " ")
 	link, _ := cmd.Flags().GetString("link")
 	path, _ := cmd.Flags().GetString("path")
